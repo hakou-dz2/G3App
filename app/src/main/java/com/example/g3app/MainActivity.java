@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         TextView reset = findViewById(R.id.tv_reset);
 
         Button login = findViewById(R.id.btn_login);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "username or password are wrong", Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+        reset.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this,ResetActivity.class);
+            startActivity(intent);
         });
     }
 }
