@@ -10,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -19,17 +24,27 @@ public class SecondActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_second);
 
-        TextView tv_welcome = findViewById(R.id.tv_welcome);
+        RecyclerView recyclerView = findViewById(R.id.list_courses);
+        List<Course> courses = new ArrayList<>();
+        courses.add(new Course("Course1", 4.0));
+        courses.add(new Course("Course2", 3.0));
+        courses.add(new Course("Course3", 10.0));
+        courses.add(new Course("Course1", 4.0));
+        courses.add(new Course("Course2", 3.0));
+        courses.add(new Course("Course3", 10.0));
+        courses.add(new Course("Course1", 4.0));
+        courses.add(new Course("Course2", 3.0));
+        courses.add(new Course("Course3", 10.0));
+        courses.add(new Course("Course1", 4.0));
+        courses.add(new Course("Course2", 3.0));
+        courses.add(new Course("Course3", 10.0));
 
-        Intent intent = getIntent();
-        tv_welcome.setText("Welcome " + intent.getStringExtra("username"));
 
-        Button btn_logout = findViewById(R.id.bnt_logout);
+        CourseAdapter courseAdapter = new CourseAdapter(courses);
+        recyclerView.setAdapter(courseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        btn_logout.setOnClickListener(view -> {
-            Intent intent1 = new Intent(SecondActivity.this, MainActivity.class);
-            startActivity(intent1);
-        });
+
 
 
 
