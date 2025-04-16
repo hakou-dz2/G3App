@@ -1,4 +1,4 @@
-package com.example.g3app;
+package com.example.g3app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.g3app.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String text_username = username.getText().toString();
                 String text_password = password.getText().toString();
-                if(text_username.equals("admin") && text_password.equals("admin")){
+                if(text_username.equals("") && text_password.equals("")){
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                     intent.putExtra("username", text_username);
                     startActivity(intent);
