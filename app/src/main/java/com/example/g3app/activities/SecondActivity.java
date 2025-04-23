@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,30 +29,33 @@ public class SecondActivity extends AppCompatActivity implements CourseAdapter.O
 
         setContentView(R.layout.activity_second);
 
-
-
-
-
-
-
     }
 
     @Override
     public void onItemClick(Course course) {
+        boolean IsTablet = getResources().getBoolean(R.bool.IsTablet);
 
-        FragmentTransaction fragmentController = getSupportFragmentManager().beginTransaction();
+        if(IsTablet){
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.tablet_info_cont);
+            InfoFragment info = (InfoFragment) fragment;
+            info.Dispaly_info(course);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("name", course.getName());
-        bundle.putDouble("grade", course.getGrade());
-        bundle.putDouble("credit", course.getCredit());
-        bundle.putDouble("Coeff", course.getCoeff());
+        }else {
 
-        InfoFragment infoFragment = new InfoFragment();
-        infoFragment.setArguments(bundle);
+            FragmentTransaction fragmentController = getSupportFragmentManager().beginTransaction();
 
-        fragmentController.replace(R.id.frag_cont, infoFragment);
-        fragmentController.addToBackStack(null);
-        fragmentController.commit();
+            Bundle bundle = new Bundle();
+            bundle.putString("name", course.getName());
+            bundle.putDouble("grade", course.getGrade());
+            bundle.putDouble("credit", course.getCredit());
+            bundle.putDouble("Coeff", course.getCoeff());
+
+            InfoFragment infoFragment = new InfoFragment();
+            infoFragment.setArguments(bundle);
+
+            fragmentController.replace(R.id.frag_cont, infoFragment);
+            fragmentController.addToBackStack(null);
+            fragmentController.commit();
+        }
     }
 }

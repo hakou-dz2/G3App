@@ -12,10 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.g3app.R;
+import com.example.g3app.structs.Course;
 
 
 public class InfoFragment extends Fragment {
-
+    TextView name,grade,coeff,credits;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +34,25 @@ public class InfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView name = view.findViewById(R.id.tv_info_name);
-        TextView grade = view.findViewById(R.id.tv_info_grade);
-        TextView coeff = view.findViewById(R.id.tv_info_coeff);
-        TextView credits = view.findViewById(R.id.tv_info_cred);
+        name = view.findViewById(R.id.tv_info_name);
+        grade = view.findViewById(R.id.tv_info_grade);
+        coeff = view.findViewById(R.id.tv_info_coeff);
+        credits = view.findViewById(R.id.tv_info_cred);
 
         Bundle bundle = this.getArguments();
+        if(bundle !=null) {
+            name.setText(bundle.getString("name"));
+            grade.setText(Double.toString(bundle.getDouble("grade")));
+            coeff.setText(Double.toString(bundle.getDouble("Coeff")));
+            credits.setText(Double.toString(bundle.getDouble("credit")));
+        }
+    }
 
-        name.setText(bundle.getString("name"));
-        grade.setText(Double.toString(bundle.getDouble("grade")));
-        coeff.setText(Double.toString(bundle.getDouble("Coeff")));
-        credits.setText(Double.toString(bundle.getDouble("credit")));
+    public void Dispaly_info(Course course){
+        name.setText(course.getName());
+        grade.setText(Double.toString(course.getGrade()));
+        coeff.setText(Double.toString(course.getCoeff()));
+        credits.setText(Double.toString(course.getCredit()));
 
     }
 }
